@@ -4,7 +4,7 @@ import "testing"
 
 func TestMap(t *testing.T) {
 	coll := From(1, 2)
-	result := Map(coll, func(x int) float32 { return float32(x) })
+	result := Map(coll, func(x int) int { return (x * 2) })
 	if len(result.Elements()) != 2 || result.Elements()[0] != 2 || result.Elements()[1] != 4 {
 		t.Errorf("Map failed to apply function to elements")
 	}
