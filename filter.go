@@ -1,18 +1,18 @@
 package gocoll
 
 // Filter filters the elements of a collection based on a predicate.
-func (collection Collection[T]) Filter(f Finder[T]) Collection[T] {
+func (collection *Collection[T]) Filter(f Predicate[T]) *Collection[T] {
 	result := New[T]()
 	for _, e := range collection.Elements() {
 		if f(e) {
 			result.Add(e)
 		}
 	}
-	return *result
+	return result
 }
 
 // Partition partitions the elements of a collection based on a predicate.
-func (collection Collection[T]) Partition(f Finder[T]) (Collection[T], Collection[T]) {
+func (collection *Collection[T]) Partition(f Predicate[T]) (*Collection[T], *Collection[T]) {
 	matching := New[T]()
 	notMatching := New[T]()
 	for _, e := range collection.Elements() {
@@ -22,22 +22,28 @@ func (collection Collection[T]) Partition(f Finder[T]) (Collection[T], Collectio
 			notMatching.Add(e)
 		}
 	}
-	return *matching, *notMatching
+	return matching, notMatching
 }
 
-// Distinct returns a collection with distinct elements.
-func (collection Collection[T]) Distinct(f Finder[T]) Collection[T] {
+func (collection *Collection[T]) Distinct(e Equality[T]) *Collection[T] {
 	result := New[T]()
-	for _, e := range collection.Elements() {
-		if !result.Contains(f) {
-			result.Add(e)
+	for _, elem := range collection.Elements() {
+		contains := false
+		for _, res := range result.Elements() {
+			if e(elem, res) {
+				contains = true
+				break
+			}
+		}
+		if !contains {
+			result.Add(elem)
 		}
 	}
-	return *result
+	return result
 }
 
 // TakeWhile returns a collection with elements until the predicate is false.
-func (collection Collection[T]) TakeWhile(f Finder[T]) Collection[T] {
+func (collection *Collection[T]) TakeWhile(f Predicate[T]) *Collection[T] {
 	result := New[T]()
 	for _, e := range collection.Elements() {
 		if f(e) {
@@ -46,11 +52,11 @@ func (collection Collection[T]) TakeWhile(f Finder[T]) Collection[T] {
 			break
 		}
 	}
-	return *result
+	return result
 }
 
 // DropWhile returns a collection without elements until the predicate is false.
-func (collection Collection[T]) DropWhile(f Finder[T]) Collection[T] {
+func (collection *Collection[T]) DropWhile(f Predicate[T]) *Collection[T] {
 	result := New[T]()
 	shouldAdd := false
 	for _, e := range collection.Elements() {
@@ -60,5 +66,5 @@ func (collection Collection[T]) DropWhile(f Finder[T]) Collection[T] {
 		shouldAdd = true
 		result.Add(e)
 	}
-	return *result
+	return result
 }
