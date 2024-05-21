@@ -48,12 +48,11 @@ func (bf *BloomFilter) Add(token string) {
 func (bf *BloomFilter) Test(token string) bool {
 	hashes := bf.getHashes(token)
 	for _, hash := range hashes {
-		_, found := bf.trie.Find(string(hash))
-		if found {
-			return true
+		if _, found := bf.trie.Find(string(hash)); !found {
+			return false
 		}
 	}
-	return false
+	return true
 }
 
 func (bf *BloomFilter) getHashes(token string) [][]byte {
