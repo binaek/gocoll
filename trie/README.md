@@ -1,6 +1,6 @@
-# gotrie
+# trie
 
-`gotrie` is a generic Trie (prefix tree) implementation in Go, which supports storing key-value pairs with optional expiry durations.
+`trie` is a generic Trie (prefix tree) implementation in Go, which supports storing key-value pairs with optional expiry durations.
 
 ## Features
 
@@ -14,7 +14,7 @@
 To install gotrie, use the following command:
 
 ```sh
-go get github.com/binaek/gotrie
+go get github.com/binaek/gocoll
 ```
 
 ## Usage
@@ -28,13 +28,13 @@ import (
     "fmt"
     "time"
 
-    "github.com/binaek/gotrie"
+    "github.com/binaek/gocoll/trie"
 
 )
 
 func main() {
     // Create a new Trie
-    trie := gotrie.NewTree[string]()
+    trie := trie.NewTree[string]()
 
     // Insert key-value pairs
     oldValue, replaced := trie.Insert("hello", "world")
@@ -99,9 +99,3 @@ Built-in support for expiring entries makes it suitable for caching and time-sen
 ### Ease of Use
 
 Simple and intuitive API, with operations mirroring common map operations.
-
-## License
-
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). See the [LICENSE](./LICENSE) file for details.
-
-Feel free to contribute to this project by opening issues or submitting pull requests on GitHub.

@@ -16,6 +16,20 @@ To install gotrie, use the following command:
 go get github.com/binaek/gocoll
 ```
 
+## Advantages
+
+### Efficient
+
+Uses a Trie structure for storing hashed values, ensuring efficient membership testing.
+
+### Customizable
+
+Supports various hash functions for better collision handling and distribution.
+
+### Thread-Safe
+
+Designed to be safe for concurrent use, making it suitable for multi-threaded applications.
+
 ## Example:
 
 ```go
