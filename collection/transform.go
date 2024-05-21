@@ -1,4 +1,4 @@
-package gocoll
+package collection
 
 // Map applies a function to each element of a collection and returns a new collection with the results.
 func Map[T, U any](collection *Collection[T], f Mapper[T, U]) *Collection[U] {

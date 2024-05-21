@@ -1,4 +1,4 @@
-package gocoll
+package collection
 
 // Collection represents a generic collection of elements of any type.
 type Collection[T any] struct {

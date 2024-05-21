@@ -1,4 +1,4 @@
-package gocoll
+package collection
 
 // Find returns the first element that satisfies the predicate, along with a boolean indicating success.
 func (c Collection[T]) Find(f Predicate[T]) (T, bool) {

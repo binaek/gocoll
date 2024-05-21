@@ -1,4 +1,4 @@
-package gocoll
+package collection
 
 // Predicate defines a function type that determines if a given element of type T satisfies a condition.
 type Predicate[T any] func(T) bool

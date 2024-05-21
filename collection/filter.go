@@ -1,4 +1,4 @@
-package gocoll
+package collection
 
 // Filter filters the elements of a collection based on a predicate.
 func (collection *Collection[T]) Filter(f Predicate[T]) *Collection[T] {

@@ -1,4 +1,4 @@
-package gocoll
+package collection
 
 // Reduce applies a function to each element of a collection and returns a single value.
 // It iterates through each element, applying the reducer function f, and accumulates a result.

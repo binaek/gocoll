@@ -1,4 +1,4 @@
-package gocoll
+package collection
 
 import "testing"
 
