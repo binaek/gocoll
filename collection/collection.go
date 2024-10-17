@@ -40,7 +40,14 @@ func (c *Collection[T]) Count() int {
 }
 
 // Elements returns a slice of all elements in the collection.
-func (c *Collection[T]) Elements() []T {
+func (c *Collection[T]) Elements(opts ...ElementsOption) []T {
+	config := &elementsConfig{}
+	for _, opt := range opts {
+		opt(config)
+	}
+	if config.noNil && c.elements == nil {
+		return []T{}
+	}
 	return c.elements
 }
 
@@ -52,4 +59,18 @@ func (c *Collection[T]) Clear() {
 // IsEmpty checks if the collection is empty.
 func (c *Collection[T]) IsEmpty() bool {
 	return len(c.elements) == 0
+}
+
+type ElementsOption func(*elementsConfig)
+
+type elementsConfig struct {
+	noNil bool
+}
+
+// NoNil prevents the Elements method from returning nil.
+// If the collection is nil, an empty slice is returned instead.
+func NoNil() ElementsOption {
+	return func(c *elementsConfig) {
+		c.noNil = true
+	}
 }
