@@ -11,8 +11,8 @@ func Reduce[T any, U any](collection Collection[T], initial U, f Reducer[T, U]) 
 }
 
 // Min returns the minimum element of a collection based on a comparator function.
-// The comparator function f should return true if the first argument is less than the second.
-func (collection *Collection[T]) Min(f func(T, T) bool) T {
+// The ComparatorPredicate should return true if the first argument is less than the second.
+func (collection *Collection[T]) Min(f ComparatorPredicate[T]) T {
 	min := collection.elements[0]
 	for _, e := range collection.Elements() {
 		if f(e, min) {
@@ -23,8 +23,8 @@ func (collection *Collection[T]) Min(f func(T, T) bool) T {
 }
 
 // Max returns the maximum element of a collection based on a comparator function.
-// The comparator function f should return true if the first argument is greater than the second.
-func (collection *Collection[T]) Max(f func(T, T) bool) T {
+// The ComparatorPredicate should return true if the first argument is greater than the second.
+func (collection *Collection[T]) Max(f ComparatorPredicate[T]) T {
 	max := collection.elements[0]
 	for _, e := range collection.Elements() {
 		if f(max, e) {

@@ -3,6 +3,8 @@ package collection
 // Predicate defines a function type that determines if a given element of type T satisfies a condition.
 type Predicate[T any] func(T) bool
 
+type ComparatorPredicate[T any] func(T, T) bool
+
 // Equality defines a function type that determines if two elements of type T are equal.
 type Equality[T any] func(T, T) bool
 
@@ -17,6 +19,11 @@ type Reducer[T any, V any] func(V, T) V
 
 // GroupKey defines a function type that categorizes an element of type T into a group of type G.
 type GroupKey[T any, G comparable] func(T) G
+
+func ZeroValue[T any]() T {
+	var zeroValue T
+	return zeroValue
+}
 
 // NotFinder returns a Finder function that negates the result of the given Finder function f.
 func NotFinder[T any](f Predicate[T]) Predicate[T] {

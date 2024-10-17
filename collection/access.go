@@ -1,25 +1,25 @@
 package collection
 
-// Find returns the first element that satisfies the predicate, along with a boolean indicating success.
+// Find returns the first element that satisfies the predicate, along with a boolean indicating whether an element was found.
+// If no element is found, the zero value of the element type is returned with a false boolean.
 func (c Collection[T]) Find(f Predicate[T]) (T, bool) {
 	for _, e := range c.Elements() {
 		if f(e) {
 			return e, true
 		}
 	}
-	var zeroValue T
-	return zeroValue, false
+	return ZeroValue[T](), false
 }
 
 // FindAll returns all elements that satisfy the predicate as a new Collection.
 func (c *Collection[T]) FindAll(f Predicate[T]) *Collection[T] {
-	result := New[T]()
+	result := []T{}
 	for _, e := range c.Elements() {
 		if f(e) {
-			result.Add(e)
+			result = append(result, e)
 		}
 	}
-	return result
+	return From(result...)
 }
 
 // All returns true if all elements satisfy the predicate.
